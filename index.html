@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Shape Up or Shape Out</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <header class="container" id="container-one">
+            <h2 class="title">Add A Shape!</h2>
+            <div class="shape">
+                <button type="submit" id="rectangle">Add Rectangle</button>
+                <input type="text" id="rectangle-height" placeholder="height px">
+                <input type="text" id="rectangle-width" placeholder="width px">
+            </div>
+            <div class="shape">
+                <button type="submit" id="square">Add Square</button>
+                <input type="text" id="square-side-length" placeholder="side length px">
+            </div>
+            <div class="shape">
+                <button type="submit" id="circle">Add Circle</button>
+                <input type="text" id="circle-radius" placeholder="radius">
+            </div>
+            <div class="shape">
+                <button type="submit" id="triangle">Add Triangle</button>
+                <input type="text" id="triangle-height" placeholder="height">
+            </div>
+        </header>
+        <main class="container" id="container-two">
+            <div id="canvas">
+            </div>
+            <div class="side-panel">
+                <div class="side-panel-shape" id="result-name">Shape Name</div>
+                <div class="side-panel-shape" id="result"></div>
+                <div class="side-panel-width" id="result-name">Width</div>
+                <div class="side-panel-width" id="result"></div>
+                <div class="side-panel-height" id="result-name">Height</div>
+                <div class="side-panel-height" id="result"></div>
+                <div class="side-panel-raidus" id="result-name">Radius</div>
+                <div class="side-panel-raidus" id="result"></div>
+                <div class="side-panel-area" id="result-name">Area</div>
+                <div class="side-panel-area" id="result"></div>
+                <div class="side-panel-perimeter" id="result-name">Perimeter</div>
+                <div class="side-panel-perimeter" id="result"></div>
+            </div>
+
+
+        </main>
+        <script src="script.js"></script>
+    </body>
+</html>
