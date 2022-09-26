@@ -3,13 +3,14 @@ let canvas = document.getElementById('canvas');
 
 class Shape {
     constructor(height, width) {
-        // this.shapeName = shapeName;
+        this.shapeName = 'Shape';
         this.div = document.createElement('div');
         this.height = height;
         this.width = width;
         canvas.appendChild(this.div);
-        this.updateColor();
         this.updateLocation();
+        this.div.addEventListener('click', () => this.describe());
+        this.div.addEventListener('dblclick', () => this.div.remove());
     }
     shapeArea() {
         return this.height * this.width;
@@ -18,21 +19,37 @@ class Shape {
         return (this.height * 2) + (this.width * 2);
     }
     updateLocation() {
-        let xVal = randomVal(0, MAX);
-        let yVal = randomVal(0, MAX);
+        let xVal = randomVal(0, (MAX - this.width));
+        let yVal = randomVal(0, (MAX - this.height));
         this.div.style.left = `${xVal}px`;
         this.div.style.top = `${yVal}px`;
-    }
-    updateColor() {
-        let randomColor = `rgb(${randomVal(0,255)}, ${randomVal(0,255)}, ${randomVal(0,255)})`
-        this.div.style.backgroundColor = randomColor;
+    }   
+    describe() {
+        let shapeBox = document.getElementById('shape-box');
+        shapeBox.innerHTML = '';
+        shapeBox.append(this.shapeName);
+        let widthBox = document.getElementById('width-box');
+        widthBox.innerHTML = '';
+        widthBox.append(this.width);
+        let heightBox = document.getElementById('height-box');
+        heightBox.innerHTML = '';
+        heightBox.append(this.height);
+        let radiusBox = document.getElementById('radius-box');
+        radiusBox.innerHTML = '';
+        radiusBox.append('N/A');
+        let areaBox = document.getElementById('area-box');
+        areaBox.innerHTML = '';
+        areaBox.append(this.shapeArea());
+        let perimeterBox = document.getElementById('perimeter-box');
+        perimeterBox.innerHTML = '';
+        perimeterBox.append(this.shapePerimeter());
     }
 }   
 
 class Circle extends Shape {
     constructor(radius) {
         super(2*radius, 2*radius);
-        this.name = "Circle";
+        this.shapeName = "Circle";
         this.div.className = 'new-circle'
         this.div.style.height = `${radius}px`;
         this.div.style.width = `${radius}px`;  
@@ -46,14 +63,43 @@ class Circle extends Shape {
         const radius = this.height / 2;
         return ((radius * 2) * Math.PI);
     }
+    updateLocation() {
+        const radiusy = this.height / 2;
+        const radiusx = this.width / 2;
+        let xVal = randomVal(0, (MAX - radiusx));
+        let yVal = randomVal(0, (MAX - radiusy));
+        this.div.style.left = `${xVal}px`;
+        this.div.style.top = `${yVal}px`;
+    }
+    describe() {
+        const radius = this.height / 2;
+        let shapeBox = document.getElementById('shape-box');
+        shapeBox.innerHTML = '';
+        shapeBox.append(this.shapeName);
+        let widthBox = document.getElementById('width-box');
+        widthBox.innerHTML = '';
+        widthBox.append('N/A');
+        let heightBox = document.getElementById('height-box');
+        heightBox.innerHTML = '';
+        heightBox.append('N/A');
+        let radiusBox = document.getElementById('radius-box');
+        radiusBox.innerHTML = '';
+        radiusBox.append(radius);
+        let areaBox = document.getElementById('area-box');
+        areaBox.innerHTML = '';
+        areaBox.append(this.shapeArea());
+        let perimeterBox = document.getElementById('perimeter-box');
+        perimeterBox.innerHTML = '';
+        perimeterBox.append(this.shapePerimeter());
+    }
 }
 
 class Triangle extends Shape {
     constructor(height) {
         super(height, height);
-        this.name = "Triangle";
+        this.shapeName = "Triangle";
         this.div.className = 'new-triangle' 
-        this.div.style.borderBottom = `${height}px solid lightgoldenrodyellow`;
+        this.div.style.borderBottom = `${height}px solid yellow`;
         this.div.style.borderRight = `${height}px solid transparent`;
         canvas.appendChild(this.div);
     }
@@ -62,14 +108,22 @@ class Triangle extends Shape {
     }
     shapePerimeter() {
         const hyp = Math.sqrt(Math.pow(this.height, 2) + Math.pow(this.height, 2));
-        return this.height + this.height + hyp;
+        return Number(this.height) + Number(this.height) + hyp;
+    }
+    updateLocation() {
+        const heighty = this.height;
+        const heightx = this.width;
+        let xVal = randomVal(0, (MAX - heightx));
+        let yVal = randomVal(0, (MAX - heighty));
+        this.div.style.left = `${xVal}px`;
+        this.div.style.top = `${yVal}px`;
     }
 }
 
 class Rectangle extends Shape {
     constructor (height, width) {
         super(height, width);
-        this.name = "Rectangle";
+        this.shapeName = "Rectangle";
         this.div.className = 'new-rectangle'
         this.div.style.height = `${height}px`;
         this.div.style.width = `${width}px`;
@@ -80,11 +134,41 @@ class Rectangle extends Shape {
 class Square extends Shape {
     constructor (sideLength) {
         super(sideLength, sideLength);
-        this.name = "Square";
+        this.shapeName = "Square";
         this.div.className = 'new-square'
         this.div.style.height = `${sideLength}px`;
         this.div.style.width = `${sideLength}px`;
         canvas.appendChild(this.div);  
+    }
+    updateLocation() {
+        const sideLengthy = this.height;
+        const sideLengthx = this.width;
+        let xVal = randomVal(0, (MAX - sideLengthx));
+        let yVal = randomVal(0, (MAX - sideLengthy));
+        this.div.style.left = `${xVal}px`;
+        this.div.style.top = `${yVal}px`;
+    }
+    describe() {
+        const sideLengthy = this.height;
+        const sideLengthx = this.width;
+        let shapeBox = document.getElementById('shape-box');
+        shapeBox.innerHTML = '';
+        shapeBox.append(this.shapeName);
+        let widthBox = document.getElementById('width-box');
+        widthBox.innerHTML = '';
+        widthBox.append(sideLengthx);
+        let heightBox = document.getElementById('height-box');
+        heightBox.innerHTML = '';
+        heightBox.append(sideLengthy);
+        let radiusBox = document.getElementById('radius-box');
+        radiusBox.innerHTML = '';
+        radiusBox.append('N/A');
+        let areaBox = document.getElementById('area-box');
+        areaBox.innerHTML = '';
+        areaBox.append(this.shapeArea());
+        let perimeterBox = document.getElementById('perimeter-box');
+        perimeterBox.innerHTML = '';
+        perimeterBox.append(this.shapePerimeter());
     }
 }
 
